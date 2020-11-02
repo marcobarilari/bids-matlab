@@ -1,11 +1,11 @@
 function p = parse_filename(filename,fields)
 % Split a filename into its building constituents
-% FORMAT p = parse_filename(filename,fields)
+% FORMAT p = bids.internal.parse_filename(filename,fields)
 %
 % Example:
 %
 % >> filename = '../sub-16/anat/sub-16_ses-mri_run-1_echo-2_FLASH.nii.gz';
-% >> parse_filename(filename)
+% >> bids.internal.parse_filename(filename)
 %
 % ans = 
 %
@@ -23,11 +23,11 @@ function p = parse_filename(filename,fields)
 % Copyright (C) 2016-2018, Guillaume Flandin, Wellcome Centre for Human Neuroimaging
 % Copyright (C) 2018--, BIDS-MATLAB developers
 
-filename = file_utils(filename,'filename');
+filename = bids.internal.file_utils(filename,'filename');
 
 %-Identify all the BIDS entity-label pairs present in the filename (delimited by "_")
 % https://bids-specification.readthedocs.io/en/stable/99-appendices/04-entity-table.html
-[parts, dummy] = regexp(filename,'(?:_)+','split','match');
+[parts, dummy] = regexp(filename,'(?:_)+','split','match'); %#ok<ASGLU>
 p.filename = filename;
 
 %-Identify the suffix and extension of this file
@@ -36,7 +36,7 @@ p.filename = filename;
 
 %-Separate the entity from the label for each pair identified above
 for i=1:numel(parts)-1
-    [d, dummy] = regexp(parts{i},'(?:\-)+','split','match');
+    [d, dummy] = regexp(parts{i},'(?:\-)+','split','match'); %#ok<ASGLU>
     p.(d{1}) = d{2};
 end
 

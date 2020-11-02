@@ -1,7 +1,7 @@
 # Travis CI (https://travis-ci.org/)
 
 language: c
-dist: bionic
+dist: focal
 cache:
   apt: true # only works with Pro version
 
@@ -23,8 +23,6 @@ install:
   - octave $OCTFLAGS --eval "addpath (fullfile (pwd, 'JSONio')); savepath ();"
   # Install BIDS-MATLAB
   - octave $OCTFLAGS --eval "addpath (pwd); savepath ();"
-  # Temporary fix for private directories in packages in Octave
-  - octave $OCTFLAGS --eval "addpath (fullfile (pwd, '+bids')); savepath ();"
   # Install BIDS-Validator
   - sudo npm install -g bids-validator
 
